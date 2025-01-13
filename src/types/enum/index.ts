@@ -1,2 +1,3 @@
 import ResponseCode from "./response-code.enum";
-export {ResponseCode};
+import ResponseMessage from "./response-message.enum";
+export {ResponseCode, ResponseMessage};

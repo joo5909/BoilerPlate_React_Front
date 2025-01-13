@@ -78,6 +78,10 @@ function Header() {
       }
     },[searchWord]);
 
+    useEffect(() => {
+      setLogin(loginUser !== null);
+    },[loginUser]);
+
     if(!status) {
       return (
               <div className='icon-button' onClick={onSearchButtonClickHandler}>
@@ -115,6 +119,7 @@ function Header() {
     //로그아웃 버튼 클릭 이벤트 처리 함수
     const onSignOutButtonClickHandler = () => {
       resetLoginUser();
+      sessionStorage.removeItem('accessToken');
       navigate(MAIN_PATH());
     }
 

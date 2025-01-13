@@ -1,11 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
-import BoardItem from './components/BoardItem';
-import Top3Item from './components/Top3Item';
-import CommentItem from './components/CommentItem';
-import FavoriteItem from './components/FavoriteItem';
-import InputBox from 'components/InputBox';
-import { latestBoardListMock, top3BoardListMock, commentListMock, favoriteListMock } from 'mocks';
 import { Route, Routes } from 'react-router-dom';
 import Main from 'views/Main';
 import Authentication from 'views/Authentication';
@@ -16,9 +10,21 @@ import BoardWrite from 'views/Board/Write';
 import BoardUpdate from 'views/Board/Update';
 import Container from 'layouts/Container';
 import { MAIN_PATH, AUTH_PATH, SEARCH_PATH, USER_PATH, BOARD_PATH, BOARD_WRITE_PATH, BOARD_DETAIL_PATH, BOARD_UPDATE_PATH } from 'constant';
+import { useLoginUserStore } from 'stores';
 
 
 function App() {   
+
+    const accessToken = localStorage.getItem('accessToken');
+    const {setLoginUser, resetLoginUser} = useLoginUserStore();
+
+    useEffect(() => {
+        if(!accessToken) {
+            resetLoginUser();
+            return;
+        }
+    }, [accessToken]);
+
     return (
         <Routes>
             <Route element={<Container/>}>

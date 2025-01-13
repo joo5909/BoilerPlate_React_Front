@@ -8,12 +8,13 @@ import { AUTH_PATH } from 'constant'
 function Container() {
 
   const {pathname} = useLocation();
-
+  console.log(pathname);
+  console.log(AUTH_PATH());
   return (
     <div>
         <Header/>
         <Outlet/>
-        {pathname !== AUTH_PATH() && <Footer/>}       
+        {!pathname.startsWith(AUTH_PATH()) && <Footer/>}       
     </div>
   )
 }
